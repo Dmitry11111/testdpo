@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Институт медицинского образования — ДПО Алмазова</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   VARIABLES & RESET
+   ============================================================ */
+:root {
+  --primary:       #176F9C;
+  --primary-dark:  #0f4f72;
+  --light-bg:      #1084BC;
+  --accent:        #0BC4E3;
+  --white:         #fafcfe;
+  --grey:          #E8EDF2;
+  --grey-dark:     #c8d0da;
+  --text:          #1a2533;
+  --text-light:    #4a5a6a;
+  --green:         #3a8a50;
+  --header-h:      80px;
+  --nav-h:         56px;
+  /* Font stack: Manrope (Google) → Segoe UI Regular (Windows system) → fallback */
+  --font-main: 'Manrope', 'Segoe UI', 'Segoe UI Regular', system-ui, sans-serif;
+  --font-display: 'Cormorant Garamond', 'Segoe UI', serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-main);
+  color: var(--text);
+  background: var(--white);
+  overflow-x: hidden;
+}
+
+a { color: var(--primary); text-decoration: none; }
+img { display: block; max-width: 100%; }
+
+/* ============================================================
+   HEADER (top bar — NOT sticky)
+   ============================================================ */
+.site-header {
+  background: linear-gradient(110deg, var(--primary-dark) 0%, var(--primary) 50%, var(--light-bg) 100%);
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  padding: 0 40px;
+  position: relative;
+  z-index: 100;
+}
+
+.header-inner {
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
+
+.logo-icon {
+  width: 54px;
+  height: 54px;
+  background: rgba(255,255,255,0.15);
+  border: 1.5px solid rgba(255,255,255,0.4);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.logo-icon svg { width: 32px; height: 32px; fill: white; opacity: 0.92; }
+
+.logo-text { display: flex; flex-direction: column; margin-left: 10px; margin-top: 3px; }
+.logo-text .inst { font-family: var(--font-main); font-weight: 300; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+.logo-text .name {
+  font-family: var(--font-main);
+  font-size: 14pt;
+  font-variant: all-petite-caps;
+  font-weight: 500;
+  color: #d39454;
+  line-height: 12pt;
+  text-shadow: none;
+  margin-bottom: 0;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px;
+  border: 1.5px solid rgba(255,255,255,0.5);
+  color: white;
+  font-family: var(--font-main);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border-radius: 2px;
+  transition: background 0.25s, border-color 0.25s;
+  white-space: nowrap;
+}
+
+.btn-header:hover {
+  background: rgba(255,255,255,0.18);
+  border-color: rgba(255,255,255,0.8);
+  color: white;
+}
+
+.btn-header svg { width: 15px; height: 15px; fill: white; opacity: 0.85; }
+
+/* ============================================================
+   STICKY NAVIGATION
+   ============================================================ */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: white;
+  border-bottom: 3px solid var(--primary);
+  box-shadow: 0 2px 20px rgba(23,111,156,0.12);
+  height: var(--nav-h);
+  transition: box-shadow 0.3s;
+}
+
+.site-nav.scrolled {
+  box-shadow: 0 4px 28px rgba(23,111,156,0.2);
+}
+
+.nav-inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 40px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  gap: 0;
+}
+
+.nav-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 18px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: 0.2px;
+  transition: color 0.2s;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: var(--font-main);
+  white-space: nowrap;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 18px;
+  right: 18px;
+  height: 3px;
+  background: var(--primary);
+  transform: scaleX(0);
+  transition: transform 0.25s cubic-bezier(.4,0,.2,1);
+}
+
+.nav-link:hover { color: var(--primary); }
+.nav-link:hover::after { transform: scaleX(1); }
+.nav-link.active { color: var(--primary); }
+.nav-link.active::after { transform: scaleX(1); }
+
+.nav-cta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 20px;
+  background: var(--primary);
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  border-radius: 2px;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.nav-cta:hover { background: var(--primary-dark); color: white; }
+.nav-cta svg { width: 14px; height: 14px; fill: white; }
+
+/* Dropdown */
+.nav-item { position: relative; height: 100%; }
+
+.nav-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 280px;
+  background: white;
+  border-top: 3px solid var(--primary);
+  box-shadow: 0 8px 32px rgba(23,111,156,0.15);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+  z-index: 300;
+}
+
+.nav-item:hover .nav-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.nav-dropdown a {
+  display: block;
+  padding: 11px 20px;
+  font-size: 13px;
+  color: var(--text);
+  border-bottom: 1px solid var(--grey);
+  transition: background 0.15s, color 0.15s, padding-left 0.15s;
+}
+
+.nav-dropdown a:last-child { border-bottom: none; }
+
+.nav-dropdown a:hover {
+  background: var(--grey);
+  color: var(--primary);
+  padding-left: 26px;
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 10px;
+  background: none;
+  border: none;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text);
+  transition: all 0.3s;
+}
+
+/* Mobile menu */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: calc(var(--header-h) + var(--nav-h));
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: white;
+  z-index: 500;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.mobile-menu.open { display: block; }
+
+.mobile-menu a {
+  display: block;
+  padding: 14px 16px;
+  font-size: 15px;
+  color: var(--text);
+  border-bottom: 1px solid var(--grey);
+  font-weight: 500;
+}
+
+.mobile-menu a:hover { color: var(--primary); background: var(--grey); }
+
+/* ============================================================
+   BANNER CAROUSEL
+   ============================================================ */
+.banner-carousel {
+  position: relative;
+  overflow: hidden;
+  background: var(--primary-dark);
+  box-shadow: 0 4px 16px rgba(23,111,156,0.3);
+  line-height: 0;
+}
+
+.banner-track {
+  display: flex;
+  transition: transform 0.6s cubic-bezier(.4,0,.2,1);
+  will-change: transform;
+}
+
+.banner-slide {
+  position: relative;
+  min-width: 100%;
+  height: 500px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(10,35,60,0.75) 0%, rgba(10,35,60,0.55) 55%, rgba(10,35,60,0.15) 100%);
+  display: flex;
+  align-items: center;
+  padding: 0 60px;
+  gap: 20px;
+  justify-content: space-between;
+  line-height: normal;
+}
+
+.banner-content {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 620px;
+  flex-shrink: 0;
+}
+
+.banner-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(28px, 3.5vw, 48px);
+  color: white;
+  line-height: 1.15;
+}
+
+.banner-title em { font-style: normal; color: var(--accent); }
+
+.banner-sub {
+  font-size: 15px;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.6;
+  font-weight: 300;
+  max-width: 500px;
+}
+
+/* reuse hero-tag, hero-btns from existing styles */
+
+.banner-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 44px;
+  height: 44px;
+  background: rgba(255,255,255,0.15);
+  border: 1.5px solid rgba(255,255,255,0.4);
+  border-radius: 2px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  backdrop-filter: blur(4px);
+}
+
+.banner-btn:hover { background: rgba(255,255,255,0.3); }
+.banner-btn svg { width: 20px; height: 20px; fill: white; }
+.banner-prev { left: 16px; }
+.banner-next { right: 16px; }
+
+.banner-dots {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.banner-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.4);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, width 0.3s;
+  padding: 0;
+}
+
+.banner-dot.active {
+  background: white;
+  width: 24px;
+  border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+  .banner-slide { height: 340px; }
+  .banner-overlay { padding: 0 20px; flex-direction: column; justify-content: center; }
+  .banner-content { max-width: 100%; gap: 12px; }
+  .banner-title { font-size: 22px; }
+  .banner-sub { font-size: 13px; }
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 5px 14px;
+  color: rgba(255,255,255,0.9);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  width: fit-content;
+  border-radius: 2px;
+}
+
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+
+.btn-hero-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 28px;
+  background: white;
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 2px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-hero-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); color: var(--primary); }
+
+.btn-hero-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 28px;
+  background: transparent;
+  border: 1.5px solid rgba(255,255,255,0.6);
+  color: white;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 2px;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.btn-hero-secondary:hover { background: rgba(255,255,255,0.12); border-color: white; color: white; }
+
+.hero-stats {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 340px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px;
+  background: rgba(11,30,50,0.35);
+  backdrop-filter: blur(8px);
+  gap: 28px;
+}
+
+.stat-item {}
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 700;
+  color: white;
+  line-height: 1;
+}
+
+.stat-num sup { font-size: 24px; vertical-align: super; }
+.stat-label { font-size: 12px; color: rgba(255,255,255,0.65); letter-spacing: 0.5px; margin-top: 4px; font-weight: 300; }
+
+/* ============================================================
+   SECTION WRAPPERS
+   ============================================================ */
+.section { padding: 64px 40px; }
+.section-inner { max-width: 1300px; margin: 0 auto; }
+.section-grey { background: var(--grey); }
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 36px;
+  gap: 16px;
+  border-bottom: 2px solid var(--grey);
+  padding-bottom: 16px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--primary-dark);
+  letter-spacing: 0.2px;
+}
+
+.section-more {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--primary);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+  transition: gap 0.2s;
+}
+
+.section-more:hover { gap: 9px; color: var(--primary); }
+
+/* ============================================================
+   EVENTS GRID
+   ============================================================ */
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.event-card {
+  background: white;
+  border-left: 4px solid var(--primary);
+  padding: 18px 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+  text-decoration: none;
+  color: var(--text);
+}
+
+.event-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(23,111,156,0.15);
+  color: var(--text);
+}
+
+.event-date-block {
+  flex-shrink: 0;
+  text-align: center;
+  min-width: 44px;
+}
+
+.event-day {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 1;
+}
+
+.event-month {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+.event-title {
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+/* ============================================================
+   NEWS GRID
+   ============================================================ */
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.news-card {
+  background: white;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.07);
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.news-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(23,111,156,0.14); color: var(--text); }
+
+.news-card-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  background: linear-gradient(135deg, var(--grey) 0%, #dde4ec 100%);
+}
+
+.news-card-img-placeholder {
+  width: 100%;
+  height: 160px;
+  background: linear-gradient(135deg, var(--grey) 0%, #dde4ec 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.news-card-img-placeholder svg { width: 40px; height: 40px; fill: var(--grey-dark); }
+
+.news-card-body { padding: 16px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.news-date { font-size: 11px; color: var(--text-light); font-weight: 500; letter-spacing: 0.3px; }
+.news-title { font-size: 13.5px; font-weight: 500; line-height: 1.55; }
+
+/* ============================================================
+   PROGRAMS SECTION
+   ============================================================ */
+.programs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.program-card {
+  position: relative;
+  padding: 32px;
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+  color: white;
+  overflow: hidden;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: filter 0.25s;
+  min-height: 200px;
+}
+
+.program-card:hover { filter: saturate(1.3) brightness(1.05); color: white; }
+
+.program-card::before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 160px;
+  height: 160px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 50%;
+}
+
+.program-card::after {
+  content: '';
+  position: absolute;
+  bottom: -50px;
+  right: 30px;
+  width: 100px;
+  height: 100px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 50%;
+}
+
+.program-card.retraining { background: linear-gradient(135deg, #0f4f72, #176F9C); }
+.program-card.qualification { background: linear-gradient(135deg, #1a6b3a, #28a158); }
+
+.program-icon { width: 40px; height: 40px; background: rgba(255,255,255,0.15); border-radius: 3px; display: flex; align-items: center; justify-content: center; }
+.program-icon svg { width: 22px; height: 22px; fill: white; }
+
+.program-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.7; font-weight: 400; }
+.program-title { font-family: var(--font-display); font-size: 24px; font-weight: 600; line-height: 1.2; }
+.program-desc { font-size: 12.5px; opacity: 0.8; line-height: 1.6; font-weight: 300; }
+
+.program-arrow {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  opacity: 0.85;
+}
+
+.program-arrow svg { width: 14px; height: 14px; fill: white; transition: transform 0.2s; }
+.program-card:hover .program-arrow svg { transform: translateX(4px); }
+
+/* ============================================================
+   REVIEWS
+   ============================================================ */
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.review-card {
+  background: white;
+  padding: 24px;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.07);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: box-shadow 0.2s;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.review-card:hover { box-shadow: 0 6px 20px rgba(23,111,156,0.12); color: var(--text); }
+
+.review-card-top { display: flex; align-items: center; gap: 14px; }
+
+.review-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--grey);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.review-avatar-placeholder {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--light-bg));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.review-avatar-placeholder svg { width: 24px; height: 24px; fill: white; }
+
+.review-name { font-size: 13.5px; font-weight: 600; color: var(--primary-dark); }
+
+.review-quote {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--text-light);
+  font-style: italic;
+  position: relative;
+  padding-left: 14px;
+}
+
+.review-quote::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 2px;
+  bottom: 2px;
+  width: 3px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+/* ============================================================
+   PARTNERS
+   ============================================================ */
+.partners-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 28px;
+  padding: 10px 0;
+}
+
+.partner-item {
+  width: 130px;
+  height: 90px;
+  background: white;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.partner-item:hover { box-shadow: 0 4px 16px rgba(23,111,156,0.13); transform: translateY(-2px); }
+.partner-item img { max-width: 100%; max-height: 100%; object-fit: contain; filter: grayscale(30%); }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  background: linear-gradient(110deg, var(--primary-dark) 0%, var(--primary) 55%, var(--light-bg) 100%);
+  color: white;
+  padding: 56px 40px 0;
+}
+
+.footer-inner {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1.5fr;
+  gap: 48px;
+  padding-bottom: 40px;
+}
+
+.footer-brand .logo-text .inst { color: rgba(255,255,255,0.5); }
+.footer-brand .logo-text .name { color: white; font-size: 16px; }
+.footer-brand p { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.7; margin-top: 14px; font-weight: 300; max-width: 280px; }
+
+.footer-col h4 {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 16px;
+  letter-spacing: 0.3px;
+}
+
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.footer-col ul li a { font-size: 13px; color: rgba(255,255,255,0.6); font-weight: 300; transition: color 0.2s, padding-left 0.2s; display: block; }
+.footer-col ul li a:hover { color: white; padding-left: 4px; }
+
+.footer-contact p { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.7; font-weight: 300; }
+.footer-contact a { color: rgba(255,255,255,0.75); font-size: 14px; font-weight: 500; }
+.footer-contact a:hover { color: white; }
+
+footer hr { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 0; }
+
+.footer-bottom {
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer-copy { font-size: 12px; color: rgba(255,255,255,0.5); font-weight: 300; }
+.footer-copy a { color: rgba(255,255,255,0.65); }
+.footer-copy a:hover { color: white; }
+
+.footer-bvi a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.55);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 5px 12px;
+  border-radius: 2px;
+  transition: background 0.2s;
+}
+
+.footer-bvi a:hover { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.9); }
+.footer-bvi svg { width: 14px; height: 14px; fill: currentColor; }
+
+/* ============================================================
+   HIGHLIGHT STRIPE
+   ============================================================ */
+.highlight-stripe {
+  background: var(--grey);
+  border-top: 3px solid var(--primary);
+  border-bottom: 3px solid var(--primary);
+  padding: 6px 0;
+}
+
+.hs-inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.hs-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 0;
+}
+
+.hs-icon { width: 36px; height: 36px; background: var(--primary); border-radius: 2px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.hs-icon svg { width: 18px; height: 18px; fill: white; }
+.hs-label { font-size: 11px; color: var(--text-light); font-weight: 400; text-transform: uppercase; letter-spacing: 1px; }
+.hs-value { font-size: 13px; color: var(--primary-dark); font-weight: 600; }
+.hs-divider { width: 1px; height: 40px; background: var(--grey-dark); }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1100px) {
+  .hero-stats { display: none; }
+  .programs-grid { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  :root { --header-h: 64px; }
+  .section { padding: 40px 20px; }
+  .site-header { padding: 0 20px; }
+  .nav-inner { padding: 0 20px; }
+  .hero-content { padding: 0 20px; }
+  .hero { height: auto; padding: 56px 20px; }
+
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+
+  .footer-top { grid-template-columns: 1fr; gap: 28px; }
+  footer { padding: 40px 20px 0; }
+
+  .hs-divider { display: none; }
+  .hs-inner { gap: 8px; }
+  .hs-item { padding: 8px 0; }
+
+  .programs-grid { grid-template-columns: 1fr; }
+  .section-head { flex-direction: column; align-items: flex-start; gap: 8px; }
+}
+
+/* ============================================================
+   SCROLL ANIMATIONS
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ============================================================
+   DEMO PLACEHOLDER DATA STYLE
+   ============================================================ */
+.demo-badge {
+  display: inline-block;
+  background: var(--accent);
+  color: white;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  padding: 2px 8px;
+  text-transform: uppercase;
+  border-radius: 2px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="logo-wrap">
+      <div class="logo-icon">
+        <!-- Medical cross / caduceus icon -->
+        <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18 4h4v32h-4V4z"/>
+          <path d="M4 18h32v4H4v-4z"/>
+          <path d="M20 8c-5 0-10 3-10 8 0 3 2 5 5 6l5 2 5-2c3-1 5-3 5-6 0-5-5-8-10-8z" opacity=".3"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span class="inst">ФГБУ НМИЦ им. В.А. Алмазова</span>
+        <span class="name">Институт Медицинского<br>Образования</span>
+      </div>
+    </a>
+
+    <div class="header-actions">
+      <a href="/confirm-for-dpo/" class="btn-header">
+        <svg viewBox="0 0 20 20"><path d="M10 10a4 4 0 100-8 4 4 0 000 8zm0 2c-5.33 0-8 2.67-8 4v1h16v-1c0-1.33-2.67-4-8-4z"/></svg>
+        Личный кабинет
+      </a>
+      <a href="" class="btn-header bvi-open">
+        <svg viewBox="0 0 20 20"><path d="M10 4C5 4 1.73 7.11 1 10c.73 2.89 4 6 9 6s8.27-3.11 9-6c-.73-2.89-4-6-9-6zm0 10a4 4 0 110-8 4 4 0 010 8zm0-6a2 2 0 100 4 2 2 0 000-4z"/></svg>
+        Версия для слабовидящих
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     STICKY NAVIGATION
+     ============================================================ -->
+<nav class="site-nav" id="siteNav">
+  <div class="nav-inner">
+    <div class="nav-links">
+      <a href="/news" class="nav-link" target="_blank">Новости</a>
+
+      <div class="nav-item">
+        <button class="nav-link active" onclick="return false;">Специалистам ▾</button>
+        <div class="nav-dropdown">
+          <a href="/retraining">Программы профессиональной переподготовки</a>
+          <a href="/qualification">Программы повышения квалификации</a>
+        </div>
+      </div>
+
+      <a href="" class="nav-link">Обучающимся</a>
+      <a href="" class="nav-link">Работникам центра</a>
+      <a href="" class="nav-link">Контакты</a>
+    </div>
+
+    <a href="/confirm-for-dpo/" class="nav-cta">
+      <svg viewBox="0 0 20 20"><path d="M10 10a4 4 0 100-8 4 4 0 000 8zm0 2c-5.33 0-8 2.67-8 4v1h16v-1c0-1.33-2.67-4-8-4z"/></svg>
+      Войти в кабинет
+    </a>
+
+    <button class="hamburger" id="hamburgerBtn" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile nav -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/news">Новости</a>
+  <a href="/retraining">Проф. переподготовка</a>
+  <a href="/qualification">Повышение квалификации</a>
+  <a href="">Обучающимся</a>
+  <a href="">Работникам центра</a>
+  <a href="">Контакты</a>
+  <a href="/confirm-for-dpo/" style="background:var(--primary);color:white;margin-top:12px;text-align:center;font-weight:600;">Личный кабинет →</a>
+</div>
+
+<!-- ============================================================
+     BANNER CAROUSEL
+     ============================================================ -->
+<div class="banner-carousel" id="bannerCarousel">
+  <div class="banner-track" id="bannerTrack">
+    <!-- Slide 1: main banner image -->
+    <div class="banner-slide active">
+      <img src="/wp-content/themes/dpo-style/images/dpo.jpg" alt="ИМО Алмазова" class="banner-img">
+      <div class="banner-overlay">
+        <div class="banner-content">
+          <span class="hero-tag">
+            <svg style="width:8px;height:8px;fill:currentColor" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5"/></svg>
+            Дополнительное профессиональное образование
+          </span>
+          <h1 class="banner-title">Развивайте профессиональные<br>компетенции в <em>медицинском образовании</em></h1>
+          <p class="banner-sub">Программы переподготовки и повышения квалификации для медицинских специалистов</p>
+          <div class="hero-btns">
+            <a href="/retraining" class="btn-hero-primary">
+              <svg style="width:14px;height:14px;fill:var(--primary)" viewBox="0 0 20 20"><path d="M9 2H5a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7l-5-5H9zm4 5V3l4 4h-4zm-5 4h6v1H8v-1zm0 3h6v1H8v-1zm0-6h3v1H8V8z"/></svg>
+              Все программы
+            </a>
+            <a href="/confirm-for-dpo/" class="btn-hero-secondary">Записаться →</a>
+          </div>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-num">15<sup>+</sup></div>
+            <div class="stat-label">лет работы института</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">200<sup>+</sup></div>
+            <div class="stat-label">программ обучения</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">5000<sup>+</sup></div>
+            <div class="stat-label">выпускников ежегодно</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Slide 2 (можно добавить ещё) -->
+    <div class="banner-slide">
+      <img src="/wp-content/themes/dpo-style/images/dpo.jpg" alt="ИМО" class="banner-img" style="filter:hue-rotate(15deg) saturate(1.1)">
+      <div class="banner-overlay">
+        <div class="banner-content">
+          <span class="hero-tag">
+            <svg style="width:8px;height:8px;fill:currentColor" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5"/></svg>
+            Программы повышения квалификации
+          </span>
+          <h1 class="banner-title">Получите баллы НМО<br>без отрыва от <em>работы</em></h1>
+          <p class="banner-sub">Дистанционные и очные форматы обучения. Документы государственного образца</p>
+          <div class="hero-btns">
+            <a href="/qualification" class="btn-hero-primary">Повышение квалификации</a>
+            <a href="/retraining" class="btn-hero-secondary">Переподготовка →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <button class="banner-btn banner-prev" id="bannerPrev" aria-label="Назад">
+    <svg viewBox="0 0 20 20"><path d="M13 5l-6 5 6 5V5z"/></svg>
+  </button>
+  <button class="banner-btn banner-next" id="bannerNext" aria-label="Вперёд">
+    <svg viewBox="0 0 20 20"><path d="M7 5l6 5-6 5V5z"/></svg>
+  </button>
+
+  <!-- Indicators -->
+  <div class="banner-dots" id="bannerDots">
+    <button class="banner-dot active" data-slide="0"></button>
+    <button class="banner-dot" data-slide="1"></button>
+  </div>
+</div>
+
+<!-- ============================================================
+     HIGHLIGHT STRIPE
+     ============================================================ -->
+<div class="highlight-stripe">
+  <div class="hs-inner">
+    <div class="hs-item">
+      <div class="hs-icon"><svg viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16A8 8 0 0010 2zm1 11H9V9h2v4zm0-6H9V5h2v2z"/></svg></div>
+      <div>
+        <div class="hs-label">Лицензия</div>
+        <div class="hs-value">Государственная аккредитация</div>
+      </div>
+    </div>
+    <div class="hs-divider"></div>
+    <div class="hs-item">
+      <div class="hs-icon"><svg viewBox="0 0 20 20"><path d="M10 1L3 5v6c0 4.4 3 8.5 7 9.5 4-1 7-5.1 7-9.5V5l-7-4z"/></svg></div>
+      <div>
+        <div class="hs-label">Документы</div>
+        <div class="hs-value">Дипломы государственного образца</div>
+      </div>
+    </div>
+    <div class="hs-divider"></div>
+    <div class="hs-item">
+      <div class="hs-icon"><svg viewBox="0 0 20 20"><path d="M17 10a7 7 0 11-14 0 7 7 0 0114 0zM9 6v4l3 3 1-1-2.5-2.5V6H9z"/></svg></div>
+      <div>
+        <div class="hs-label">Формат</div>
+        <div class="hs-value">Очно и дистанционно</div>
+      </div>
+    </div>
+    <div class="hs-divider"></div>
+    <div class="hs-item">
+      <div class="hs-icon"><svg viewBox="0 0 20 20"><path d="M10 2a4 4 0 100 8 4 4 0 000-8zM4 14c0-2.67 4-4 6-4s6 1.33 6 4v2H4v-2z"/></svg></div>
+      <div>
+        <div class="hs-label">Преподаватели</div>
+        <div class="hs-value">Ведущие специалисты Центра</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     PROGRAMS
+     ============================================================ -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <h2 class="section-title">Программы обучения</h2>
+    </div>
+    <div class="programs-grid reveal">
+      <a href="/retraining" class="program-card retraining">
+        <div class="program-icon">
+          <svg viewBox="0 0 20 20"><path d="M9 2H5a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7l-5-5H9zm4 5V3l4 4h-4zm-5 4h6v1H8v-1zm0 3h6v1H8v-1zm0-6h3v1H8V8z"/></svg>
+        </div>
+        <div class="program-label">Профессиональная переподготовка</div>
+        <div class="program-title">Переподготовка<br>специалистов</div>
+        <div class="program-desc">Программы объёмом от 250 часов для освоения новой квалификации и смежных специальностей в медицине</div>
+        <div class="program-arrow">Перейти к программам <svg viewBox="0 0 20 20"><path d="M7 5l6 5-6 5V5z"/></svg></div>
+      </a>
+      <a href="/qualification" class="program-card qualification">
+        <div class="program-icon">
+          <svg viewBox="0 0 20 20"><path d="M10 2l2.5 5H18l-4 3.9 1.5 5.1L10 13l-5.5 3 1.5-5.1L2 7h5.5L10 2z"/></svg>
+        </div>
+        <div class="program-label">Повышение квалификации</div>
+        <div class="program-title">Повышение<br>квалификации</div>
+        <div class="program-desc">Короткие программы от 16 часов для актуализации знаний и получения НМО-баллов для аккредитации</div>
+        <div class="program-arrow">Перейти к программам <svg viewBox="0 0 20 20"><path d="M7 5l6 5-6 5V5z"/></svg></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     UPCOMING EVENTS
+     ============================================================ -->
+<section class="section section-grey">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <h2 class="section-title">Календарь предстоящих событий</h2>
+      <a href="/news?tag=programme" class="section-more">Все события →</a>
+    </div>
+    <div class="events-grid reveal">
+      <!-- Demo events — in real site these are PHP WP_Query -->
+      <a href="#" class="event-card">
+        <div class="event-date-block">
+          <div class="event-day">12</div>
+          <div class="event-month">мар</div>
+        </div>
+        <div class="event-title">Семинар по кардиореабилитации для среднего медицинского персонала</div>
+      </a>
+      <a href="#" class="event-card">
+        <div class="event-date-block">
+          <div class="event-day">18</div>
+          <div class="event-month">мар</div>
+        </div>
+        <div class="event-title">Цикл «Функциональная диагностика» — начало очного модуля</div>
+      </a>
+      <a href="#" class="event-card">
+        <div class="event-date-block">
+          <div class="event-day">25</div>
+          <div class="event-month">мар</div>
+        </div>
+        <div class="event-title">Вебинар «Актуальные вопросы сестринского дела в кардиологии»</div>
+      </a>
+      <a href="#" class="event-card">
+        <div class="event-date-block">
+          <div class="event-day">02</div>
+          <div class="event-month">апр</div>
+        </div>
+        <div class="event-title">Конференция молодых специалистов Центра Алмазова</div>
+      </a>
+      <a href="#" class="event-card">
+        <div class="event-date-block">
+          <div class="event-day">10</div>
+          <div class="event-month">апр</div>
+        </div>
+        <div class="event-title">Мастер-класс по ультразвуковой диагностике сердечно-сосудистых заболеваний</div>
+      </a>
+      <a href="#" class="event-card">
+        <div class="event-date-block">
+          <div class="event-day">17</div>
+          <div class="event-month">апр</div>
+        </div>
+        <div class="event-title">Курс повышения квалификации «Педиатрия»: дистанционный модуль</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     NEWS
+     ============================================================ -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <h2 class="section-title">Новости</h2>
+      <a href="/news" class="section-more">Все новости →</a>
+    </div>
+    <div class="news-grid reveal">
+      <!-- Demo news cards; real data comes from wp_remote_get feed -->
+      <a href="#" class="news-card">
+        <div class="news-card-img-placeholder"><svg viewBox="0 0 40 40"><path d="M4 8h32v24H4z" opacity=".3"/><path d="M10 14h20v2H10zM10 20h14v2H10z"/></svg></div>
+        <div class="news-card-body">
+          <div class="news-date">14 февраля 2026</div>
+          <div class="news-title">ИМО открывает новые программы ДПО для специалистов первичного звена здравоохранения</div>
+        </div>
+      </a>
+      <a href="#" class="news-card">
+        <div class="news-card-img-placeholder"><svg viewBox="0 0 40 40"><path d="M4 8h32v24H4z" opacity=".3"/><path d="M10 14h20v2H10zM10 20h14v2H10z"/></svg></div>
+        <div class="news-card-body">
+          <div class="news-date">08 февраля 2026</div>
+          <div class="news-title">Международная стажировка сотрудников ИМО на базе партнёрских клиник Европы</div>
+        </div>
+      </a>
+      <a href="#" class="news-card">
+        <div class="news-card-img-placeholder"><svg viewBox="0 0 40 40"><path d="M4 8h32v24H4z" opacity=".3"/><path d="M10 14h20v2H10zM10 20h14v2H10z"/></svg></div>
+        <div class="news-card-body">
+          <div class="news-date">31 января 2026</div>
+          <div class="news-title">Выпускной церемонии 2025 года: 600 специалистов получили документы об обучении</div>
+        </div>
+      </a>
+      <a href="#" class="news-card">
+        <div class="news-card-img-placeholder"><svg viewBox="0 0 40 40"><path d="M4 8h32v24H4z" opacity=".3"/><path d="M10 14h20v2H10zM10 20h14v2H10z"/></svg></div>
+        <div class="news-card-body">
+          <div class="news-date">20 января 2026</div>
+          <div class="news-title">Начало приёма заявок на программы НМО первого квартала 2026 года</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     REVIEWS
+     ============================================================ -->
+<section class="section section-grey">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <h2 class="section-title">Отзывы</h2>
+      <a href="/news?tag=review" class="section-more">Все отзывы →</a>
+    </div>
+    <div class="reviews-grid reveal">
+      <a href="#" class="review-card">
+        <div class="review-card-top">
+          <div class="review-avatar-placeholder"><svg viewBox="0 0 20 20"><path d="M10 10a4 4 0 100-8 4 4 0 000 8zm0 2c-5.33 0-8 2.67-8 4v1h16v-1c0-1.33-2.67-4-8-4z"/></svg></div>
+          <div>
+            <div class="review-name">Елена Семёнова</div>
+            <div style="font-size:11px;color:var(--text-light)">Врач-кардиолог, ГБУЗ СПб</div>
+          </div>
+        </div>
+        <div class="review-quote">Отличная организация учебного процесса. Преподаватели — практикующие специалисты высокого уровня. После курса сразу удалось применить новые знания в работе.</div>
+      </a>
+      <a href="#" class="review-card">
+        <div class="review-card-top">
+          <div class="review-avatar-placeholder"><svg viewBox="0 0 20 20"><path d="M10 10a4 4 0 100-8 4 4 0 000 8zm0 2c-5.33 0-8 2.67-8 4v1h16v-1c0-1.33-2.67-4-8-4z"/></svg></div>
+          <div>
+            <div class="review-name">Андрей Власов</div>
+            <div style="font-size:11px;color:var(--text-light)">Главная медсестра, Ленобласть</div>
+          </div>
+        </div>
+        <div class="review-quote">Программа повышения квалификации полностью оправдала ожидания. Дистанционный формат удобен для работающих специалистов. Рекомендую коллегам.</div>
+      </a>
+      <a href="#" class="review-card">
+        <div class="review-card-top">
+          <div class="review-avatar-placeholder"><svg viewBox="0 0 20 20"><path d="M10 10a4 4 0 100-8 4 4 0 000 8zm0 2c-5.33 0-8 2.67-8 4v1h16v-1c0-1.33-2.67-4-8-4z"/></svg></div>
+          <div>
+            <div class="review-name">Мария Петрова</div>
+            <div style="font-size:11px;color:var(--text-light)">Медсестра реанимации</div>
+          </div>
+        </div>
+        <div class="review-quote">Прошла переподготовку в ИМО и очень довольна. База великолепная, учебный материал структурирован, практика на базе НМИЦ — бесценный опыт.</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PARTNERS
+     ============================================================ -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <h2 class="section-title">Партнёры</h2>
+    </div>
+    <div class="partners-row reveal">
+      <div class="partner-item">
+        <img src="https://abit.almazovcentre.ru/wp-content/uploads/2023/05/Profkom.webp" alt="Профком обучающихся">
+      </div>
+      <div class="partner-item">
+        <img src="https://abit.almazovcentre.ru/wp-content/uploads/2023/05/stud-club-logo.webp" alt="Студенческий совет">
+      </div>
+      <div class="partner-item">
+        <img src="https://abit.almazovcentre.ru/wp-content/uploads/2023/05/logo-asno-vekt-3D-albo.webp" alt="АСНО">
+      </div>
+      <div class="partner-item">
+        <img src="https://abit.almazovcentre.ru/wp-content/uploads/2023/05/sport-club-logo.webp" alt="Спортивный клуб">
+      </div>
+      <div class="partner-item">
+        <img src="https://abit.almazovcentre.ru/wp-content/uploads/2023/05/Sovet-projiv-logo.webp" alt="Совет проживающих">
+      </div>
+      <div class="partner-item">
+        <img src="https://abit.almazovcentre.ru/wp-content/uploads/2023/05/logo-volontyor-org.webp" alt="Волонтёры">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo-wrap" style="pointer-events:none;">
+          <div class="logo-icon">
+            <svg viewBox="0 0 40 40"><path d="M18 4h4v32h-4V4z"/><path d="M4 18h32v4H4v-4z"/></svg>
+          </div>
+          <div class="logo-text">
+            <span class="inst">ФГБУ НМИЦ им. В.А. Алмазова</span>
+            <span class="name">Институт Медицинского<br>Образования</span>
+          </div>
+        </div>
+        <p>Программы дополнительного профессионального образования для специалистов здравоохранения. 197341, г. Санкт-Петербург, ул. Аккуратова, д. 2</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Разделы сайта</h4>
+        <ul>
+          <li><a href="">Новости</a></li>
+          <li><a href="/retraining/">Проф. переподготовка</a></li>
+          <li><a href="/qualification/">Повышение квалификации</a></li>
+          <li><a href="">Обучающимся</a></li>
+          <li><a href="">Работникам центра</a></li>
+          <li><a href="">Контакты</a></li>
+          <li><a href="/sitemap/">Карта сайта</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-contact">
+        <h4>Свяжитесь с нами</h4>
+        <p>197341, г. Санкт-Петербург,<br>ул. Аккуратова, д. 2</p>
+        <br>
+        <a href="tel:+78126603704">+7 (812) 660-37-04</a>
+        <br><br>
+        <h4 style="margin-top:4px;">Полезные ссылки</h4>
+        <ul>
+          <li><a href="">Минздрав России</a></li>
+          <li><a href="">Минобрнауки России</a></li>
+          <li><a href="">Вопрос руководству</a></li>
+          <li><a href="/sveden/">Сведения об организации</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="footer-bottom">
+      <div class="footer-copy">
+        <a href="">© ФГБУ «НМИЦ им. В. А. Алмазова» Минздрава России</a> — Институт медицинского образования (2008–2026)
+      </div>
+      <div class="footer-bvi">
+        <a href="" class="bvi-open">
+          <svg viewBox="0 0 20 20"><path d="M10 4C5 4 1.73 7.11 1 10c.73 2.89 4 6 9 6s8.27-3.11 9-6c-.73-2.89-4-6-9-6zm0 10a4 4 0 110-8 4 4 0 010 8zm0-6a2 2 0 100 4 2 2 0 000-4z"/></svg>
+          Версия для слабовидящих
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Sticky nav shadow on scroll ────────────────────────────
+const nav = document.getElementById('siteNav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// ── Mobile hamburger ───────────────────────────────────────
+const hamburger = document.getElementById('hamburgerBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+
+hamburger.addEventListener('click', () => {
+  const open = mobileMenu.classList.toggle('open');
+  hamburger.setAttribute('aria-expanded', open);
+  const spans = hamburger.querySelectorAll('span');
+  if (open) {
+    spans[0].style.cssText = 'transform:rotate(45deg) translate(5px,5px)';
+    spans[1].style.cssText = 'opacity:0';
+    spans[2].style.cssText = 'transform:rotate(-45deg) translate(5px,-5px)';
+  } else {
+    spans.forEach(s => s.style.cssText = '');
+  }
+});
+
+// ── Banner Carousel ────────────────────────────────────────
+(function() {
+  const track = document.getElementById('bannerTrack');
+  const slides = track ? track.querySelectorAll('.banner-slide') : [];
+  const dots = document.querySelectorAll('.banner-dot');
+  const prevBtn = document.getElementById('bannerPrev');
+  const nextBtn = document.getElementById('bannerNext');
+  let current = 0;
+  let timer;
+
+  function goTo(idx) {
+    current = (idx + slides.length) % slides.length;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  if (prevBtn) prevBtn.addEventListener('click', () => { goTo(current - 1); resetTimer(); });
+  if (nextBtn) nextBtn.addEventListener('click', () => { goTo(current + 1); resetTimer(); });
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => { goTo(+dot.dataset.slide); resetTimer(); });
+  });
+
+  function resetTimer() {
+    clearInterval(timer);
+    if (slides.length > 1) timer = setInterval(() => goTo(current + 1), 5000);
+  }
+
+  if (slides.length > 1) resetTimer();
+})();
+
+// ── Scroll reveal ──────────────────────────────────────────
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+revealEls.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
