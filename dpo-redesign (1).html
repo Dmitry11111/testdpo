@@ -990,6 +990,12 @@ footer hr { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 
   border-radius: 2px;
   margin-left: 8px;
   vertical-align: middle;
+   #main-logo {
+  height: 80px;
+  width: 80px;
+  object-fit: contain;
+  display: block;
+}
 }
 </style>
 </head>
@@ -999,17 +1005,15 @@ footer hr { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 
      HEADER
      ============================================================ -->
 <header class="site-header">
-  <div class="header-inner">
+ <div class="header-inner">
     <a href="/" class="logo-wrap">
-      <div class="logo-icon">
-        <!-- Medical cross / caduceus icon -->
-         <img src="/testdpo/newlogo.svg" id="main-logo">
-      </div>
+      <img src="/newlogo.svg" id="main-logo" alt="ИМО Алмазова">
       <div class="logo-text">
         <span class="inst">ФГБУ НМИЦ им. В.А. Алмазова</span>
         <span class="name">Институт Медицинского<br>Образования</span>
       </div>
     </a>
+  </div>
 
     <div class="header-actions">
       <a href="/confirm-for-dpo/" class="btn-header">
